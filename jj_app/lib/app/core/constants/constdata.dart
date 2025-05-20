@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String googleApiKey = '';
 
-const kPrimary = Color(0xffF96176);
-const kSecondary = Color(0xff58BB87);
+const kPrimary = Color(0xff4caf50);
+const kSecondary = Color(0xffff9800);
 const kSplashBackground = Color(0xffFFEBF3);
 const kHoverColor = Color(0xffFFC9A7);
 const kPrimaryLight = Color(0xFF40F3EA);

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:jj_app/app/presentation/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,18 +13,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Journey Junction App',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
-      darkTheme: ThemeData.dark(),
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Journey Junction')),
-        body: const Center(child: Text('Hello World')),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'JJ App',
+          theme: ThemeData(primarySwatch: Colors.blue),
+          home: const SplashScreen(),
+        );
+      },
     );
   }
 }
