@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
 import 'package:jj_app/app/core/utils/app_styles.dart';
+import 'package:jj_app/app/presentation/cloudNotificationScreen/cloud_notification_screen.dart';
+import 'package:jj_app/app/presentation/profile/profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,19 +14,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: kPrimary,
-        title: Text(
-          'Home Screen',
-          style: appStyle(20, kWhite, FontWeight.w600),
-        ),
+        title: Text('Home ', style: appStyle(20, kDark, FontWeight.w600)),
         actions: [
           Badge(
-            backgroundColor: kWhite,
-            label: Text(
-              "1",
-              style: appStyle(12, kSecondary, FontWeight.normal),
-            ),
+            backgroundColor: kPrimary,
+            label: Text("1", style: appStyle(12, kWhite, FontWeight.normal)),
             child: GestureDetector(
+              onTap: () => Get.to(() => CloudNotificationScreen()),
               child: CircleAvatar(
                 backgroundColor: kSecondary,
                 radius: 17.r,
@@ -34,6 +30,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(width: 10.w),
           GestureDetector(
+            onTap: () => Get.to(() => ProfileScreen()),
             child: CircleAvatar(
               backgroundColor: kSecondary,
               radius: 17.r,
@@ -43,7 +40,6 @@ class HomeScreen extends StatelessWidget {
           SizedBox(width: 10.w),
         ],
       ),
-
       body: Container(),
     );
   }
