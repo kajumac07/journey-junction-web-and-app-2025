@@ -1,8 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
 import 'package:jj_app/app/core/utils/app_styles.dart';
+import 'package:jj_app/app/core/utils/toast_msg.dart';
+import 'package:jj_app/app/global/widgets/dashed_driver.dart';
 import 'package:jj_app/app/global/widgets/reusable_text.dart';
+import 'package:jj_app/app/presentation/profile/profile_details_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -15,87 +20,238 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kLightWhite,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kLightWhite,
-        title: Text("My Profile", style: appStyle(24, kDark, FontWeight.bold)),
+        title: Text("Profile", style: appStyle(24, kDark, FontWeight.bold)),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildProfileHeader(),
-            SizedBox(height: 20.h),
-            _buildSocialStats(),
-            SizedBox(height: 20.h),
-            _buildProfileSections(),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 0.h),
+              GestureDetector(child: buildTopProfileSection()),
+              SizedBox(height: 10.h),
+              Container(
+                width: double.maxFinite,
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  color: kLightWhite,
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Manage Profile",
+                          style:
+                              kIsWeb
+                                  ? TextStyle(color: kPrimary)
+                                  : appStyle(18, kPrimary, FontWeight.normal),
+                        ),
+                        SizedBox(width: 5.w),
+                        Container(width: 30.w, height: 3.h, color: kSecondary),
+                      ],
+                    ),
+                    SizedBox(height: 15.h),
+                    const DashedDivider(color: kGrayLight),
+                    SizedBox(height: 10.h),
+                    buildListTile("assets/bookings_bw.png", "Blogs", () {}),
+                    buildListTile(
+                      "assets/profile_bw.png",
+                      "My Profile",
+                      () => Get.to(() => const UserProfileScreen()),
+                    ),
+                    buildListTile("assets/rating_bw.png", "Ratings", () {}),
+                    buildListTile(
+                      "assets/notification_setting.png",
+                      "Notification ON/OFF",
+                      () {
+                        // Get.to(() => NotificationScreenSetting());
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 18.h),
+              Container(
+                width: double.maxFinite,
+                // margin: EdgeInsets.symmetric(horizontal: 12.w),
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  color: kLightWhite,
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "More",
+                          style:
+                              kIsWeb
+                                  ? TextStyle(color: kPrimary)
+                                  : appStyle(18, kPrimary, FontWeight.normal),
+                        ),
+                        SizedBox(width: 5.w),
+                        Container(width: 30.w, height: 3.h, color: kSecondary),
+                      ],
+                    ),
+                    SizedBox(height: 15.h),
+                    const DashedDivider(color: kGrayLight),
+                    SizedBox(height: 10.h),
+                    buildListTile(
+                      "assets/about_us_bw.png",
+                      "About us",
+                      // () => Get.to(() => AboutUsScreen()),
+                      () => showToastMessage(
+                        "Coming Soon",
+                        "This feature is not available yet",
+                        kPrimary,
+                      ),
+                    ),
+                    buildListTile(
+                      "assets/help_bw.png",
+                      "Help",
+                      () => showToastMessage(
+                        "Coming Soon",
+                        "This feature is not available yet",
+                        kPrimary,
+                      ),
+                    ),
+                    buildListTile(
+                      "assets/t_c_bw.png",
+                      "Terms & Conditions",
+                      () => showToastMessage(
+                        "Coming Soon",
+                        "This feature is not available yet",
+                        kPrimary,
+                      ),
+                    ),
+                    buildListTile(
+                      "assets/privacy_bw.png",
+                      "Privacy Policy",
+                      () => showToastMessage(
+                        "Coming Soon",
+                        "This feature is not available yet",
+                        kPrimary,
+                      ),
+                    ),
+                    buildListTile("assets/out_bw.png", "Logout", () {
+                      showDialog<void>(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext dialogContext) {
+                          return AlertDialog(
+                            title: const Text('Logout'),
+                            content: const Text(
+                              'Are you sure you want to log out from this account',
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(
+                                  'Yes',
+                                  style: appStyle(
+                                    15,
+                                    kSecondary,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(dialogContext),
+                                child: Text(
+                                  "No",
+                                  style: appStyle(
+                                    15,
+                                    kPrimary,
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildProfileHeader() {
-    return Container(
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30.r),
-          bottomRight: Radius.circular(30.r),
+  Widget buildListTile(String iconName, String title, void Function() onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: ListTile(
+        leading: Image.asset(
+          iconName,
+          height: 20.h,
+          width: 20.w,
+          color: kPrimary,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 20,
-            spreadRadius: 1,
-          ),
-        ],
+        trailing: const Icon(Icons.arrow_forward_ios, size: 18, color: kGray),
+        title: Text(
+          title,
+          style:
+              kIsWeb
+                  ? TextStyle(color: kDark)
+                  : appStyle(13, kDark, FontWeight.normal),
+        ),
+        // onTap: onTap,
+      ),
+    );
+  }
+
+  //================================ top Profile section =============================
+  Container buildTopProfileSection() {
+    return Container(
+      height: kIsWeb ? 180.h : 120.h,
+      width: double.maxFinite,
+      padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 12.w),
+      decoration: BoxDecoration(
+        color: kLightWhite,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: kPrimary, width: 2.w),
-            ),
+          CircleAvatar(
+            radius: 33.r,
+            backgroundColor: kSecondary,
             child: CircleAvatar(
-              radius: 40.r,
+              radius: 33.r,
               backgroundImage: NetworkImage(
-                "https://randomuser.me/api/portraits/men/1.jpg",
+                "https://imgs.search.brave.com/QBQ-rwnFl28lcob8mN6I7Hfvic_3xW3ASWL9Wt9Wzb8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTEz/MDg4NDYyNS92ZWN0/b3IvdXNlci1tZW1i/ZXItdmVjdG9yLWlj/b24tZm9yLXVpLXVz/ZXItaW50ZXJmYWNl/LW9yLXByb2ZpbGUt/ZmFjZS1hdmF0YXIt/YXBwLWluLWNpcmNs/ZS1kZXNpZ24uanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPTFr/eS1nTkhpUzJpeUxz/VVBRa3hBdFBCV0gx/Qlp0MFBLQkIxV0J0/eFFKUkU9",
               ),
             ),
           ),
-          SizedBox(width: 20.w),
-          Expanded(
+          SizedBox(width: 10.w),
+          Padding(
+            padding: EdgeInsets.only(top: 15.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ReusableText(
-                  text: "Alex Johnson",
-                  size: 20,
+                  text: "Testing User",
+                  size: 16,
                   color: kDark,
-                  fw: FontWeight.bold,
-                ),
-                SizedBox(height: 5.h),
-                ReusableText(
-                  text: "Travel Blogger & Photographer",
-                  size: 14,
-                  color: kGray,
                   fw: FontWeight.normal,
                 ),
-                SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    Icon(Icons.location_on, size: 16, color: kPrimary),
-                    SizedBox(width: 5.w),
-                    ReusableText(
-                      text: "San Francisco, CA",
-                      size: 14,
-                      color: kDark,
-                      fw: FontWeight.normal,
-                    ),
-                  ],
+                ReusableText(
+                  text: "testing@gmail.com",
+                  size: 16,
+                  color: kDark,
+                  fw: FontWeight.normal,
                 ),
               ],
             ),
@@ -105,174 +261,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildSocialStats() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildStatItem("128", "Blogs"),
-          _buildStatItem("5.2K", "Followers"),
-          _buildStatItem("342", "Following"),
-          _buildStatItem("24", "Bookmarks"),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatItem(String value, String label) {
-    return Column(
-      children: [
-        Container(
-          width: 70.w,
-          height: 70.h,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Center(
-            child: ReusableText(
-              text: value,
-              size: 18,
-              color: kPrimary,
-              fw: FontWeight.bold,
-            ),
-          ),
-        ),
-        SizedBox(height: 5.h),
-        ReusableText(
-          text: label,
-          size: 12,
-          color: kGray,
-          fw: FontWeight.normal,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProfileSections() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Column(
-        children: [
-          _buildSectionCard(
-            title: "Account Settings",
-            items: [
-              _buildListTile(Icons.person_outline, "Edit Profile", () {}),
-              _buildListTile(
-                Icons.notifications_outlined,
-                "Notifications",
-                () {},
-              ),
-              _buildListTile(Icons.privacy_tip_outlined, "Privacy", () {}),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          _buildSectionCard(
-            title: "Blog Management",
-            items: [
-              _buildListTile(Icons.article_outlined, "My Blogs", () {}),
-              _buildListTile(Icons.bookmark_border, "Saved Blogs", () {}),
-              _buildListTile(Icons.star_border, "My Ratings", () {}),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          _buildSectionCard(
-            title: "More Options",
-            items: [
-              _buildListTile(Icons.help_outline, "Help & Support", () {}),
-              _buildListTile(Icons.info_outline, "About Us", () {}),
-              _buildListTile(
-                Icons.description_outlined,
-                "Terms & Conditions",
-                () {},
-              ),
-              _buildListTile(Icons.logout, "Logout", () {
-                _showLogoutDialog();
-              }),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSectionCard({
-    required String title,
-    required List<Widget> items,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            spreadRadius: 2,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Text(title, style: appStyle(18, kPrimary, FontWeight.bold)),
-          ),
-          Divider(height: 1, color: kGrayLight),
-          Column(children: items),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildListTile(IconData icon, String title, VoidCallback onTap) {
-    return ListTile(
-      leading: Icon(icon, color: kPrimary),
-      title: Text(title, style: appStyle(14, kDark, FontWeight.normal)),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: kGray),
-      onTap: onTap,
-    );
-  }
-
-  void _showLogoutDialog() {
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text("Logout", style: appStyle(18, kDark, FontWeight.bold)),
-            content: Text(
-              "Are you sure you want to logout?",
-              style: appStyle(14, kGray, FontWeight.normal),
-            ),
-            actions: [
-              TextButton(
-                child: Text(
-                  "Cancel",
-                  style: appStyle(14, kGray, FontWeight.bold),
-                ),
-                onPressed: () => Navigator.pop(context),
-              ),
-              TextButton(
-                child: Text(
-                  "Logout",
-                  style: appStyle(14, kPrimary, FontWeight.bold),
-                ),
-                onPressed: () {
-                  // Implement logout
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-    );
+  Future<void> signOut() async {
+    try {
+      // await _firebaseAuth.signOut();
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }
