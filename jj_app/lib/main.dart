@@ -12,11 +12,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Journey Junction App',
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      darkTheme: ThemeData.dark(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: Scaffold(
-        appBar: AppBar(title: const Text('Flutter Demo Home Page')),
+        appBar: AppBar(title: const Text('Journey Junction')),
         body: const Center(child: Text('Hello World')),
       ),
     );
