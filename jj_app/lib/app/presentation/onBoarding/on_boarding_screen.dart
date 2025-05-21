@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
 import 'package:jj_app/app/core/utils/app_styles.dart';
+import 'package:jj_app/app/presentation/auth/register/register_screen.dart';
 import 'package:jj_app/app/presentation/entry/entry_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -118,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                        Get.offAll(() => EntryScreen());
+                        Get.offAll(() => RegisterScreen());
                       }
                     },
                     style: ElevatedButton.styleFrom(
