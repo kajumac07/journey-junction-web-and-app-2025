@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jj_app/app/presentation/onBoarding/on_boarding_screen.dart';
 import 'package:jj_app/app/presentation/splash/splash_screen.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'JJ App',
           theme: ThemeData(primarySwatch: Colors.blue),
-          home: const SplashScreen(),
+          home: const OnboardingScreen(),
         );
       },
     );

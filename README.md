@@ -13,6 +13,9 @@ A beautifully designed travel blogging application that helps users discover, sh
 ## 📱 Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  
+  <img src="screenshots/onb_1.png" width="200" alt="Onboard Screen">
+  <img src="screenshots/onb_2.png" width="200" alt="Onboard Screen">
   <img src="screenshots/home_1.png" width="200" alt="Home Screen">
   <img src="screenshots/home_2.png" width="200" alt="Home Screen">
   <img src="screenshots/home_3.png" width="200" alt="Home Screen">

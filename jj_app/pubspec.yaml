@@ -22,6 +22,8 @@ dependencies:
   rename:
   cached_network_image:
   shimmer:
+  smooth_page_indicator:
+  lottie:
 
 dev_dependencies:
   flutter_test:
