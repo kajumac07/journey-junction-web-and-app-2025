@@ -28,7 +28,7 @@ class UserProfileScreen extends StatelessWidget {
                   title: AnimatedOpacity(
                     opacity: expanded ? 0 : 1,
                     duration: Duration(milliseconds: 200),
-                    child: Text('Kalua Don', style: TextStyle(color: kDark)),
+                    child: Text('Darling', style: TextStyle(color: kDark)),
                   ),
                   background: Container(
                     color: Colors.white,
@@ -47,7 +47,7 @@ class UserProfileScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: kPrimary,
+                                    color: kSecondary,
                                     width: 2.w,
                                   ),
                                   image: const DecorationImage(
@@ -86,7 +86,7 @@ class UserProfileScreen extends StatelessWidget {
                                         Icon(
                                           Icons.location_on,
                                           size: 16.w,
-                                          color: kPrimary,
+                                          color: kSecondary,
                                         ),
                                         SizedBox(width: 5.w),
                                         Text(
@@ -150,7 +150,10 @@ class UserProfileScreen extends StatelessWidget {
                           ),
                           Text(
                             'See All',
-                            style: TextStyle(fontSize: 14.sp, color: kPrimary),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: kSecondary,
+                            ),
                           ),
                         ],
                       ),
@@ -239,7 +242,7 @@ class UserProfileScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.bold,
-            color: kPrimary,
+            color: kSecondary,
           ),
         ),
         SizedBox(height: 5.h),
@@ -356,7 +359,7 @@ class UserProfileScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.favorite, size: 16.w, color: kPrimary),
+                        Icon(Icons.favorite, size: 16.w, color: kSecondary),
                         SizedBox(width: 5.w),
                         Text(
                           likes,

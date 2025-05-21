@@ -41,7 +41,7 @@ class _EntryScreenState extends State<EntryScreen>
   @override
   Widget build(BuildContext context) {
     final pages = <Widget>[
-      const HomeScreen(),
+      HomeScreen(onTap: () => _handleTabChange(1)),
       const ExploreScreen(),
       const CommunityScreen(),
     ];
@@ -79,9 +79,7 @@ class _EntryScreenState extends State<EntryScreen>
 
   Widget _buildTabItem(int index, IconData icon, String label) {
     bool isActive = _currentTab == index;
-    final scale =
-        _scaleControllers[index].value * 0.2 +
-        0.8; // Scales between 0.8 and 1.0
+    final scale = _scaleControllers[index].value * 0.2 + 0.8;
 
     return GestureDetector(
       onTap: () => _handleTabChange(index),
@@ -91,7 +89,6 @@ class _EntryScreenState extends State<EntryScreen>
           Stack(
             alignment: Alignment.center,
             children: [
-              // Background bubble (visible only when active)
               if (isActive)
                 ScaleTransition(
                   scale: _scaleControllers[index],
@@ -99,7 +96,7 @@ class _EntryScreenState extends State<EntryScreen>
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: kPrimary.withOpacity(0.15),
+                      color: kSecondary.withOpacity(0.15),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -107,7 +104,11 @@ class _EntryScreenState extends State<EntryScreen>
               // Icon with scale animation
               Transform.scale(
                 scale: scale,
-                child: Icon(icon, color: isActive ? kPrimary : kGray, size: 28),
+                child: Icon(
+                  icon,
+                  color: isActive ? kSecondary : kGray,
+                  size: 28,
+                ),
               ),
             ],
           ),
@@ -116,7 +117,7 @@ class _EntryScreenState extends State<EntryScreen>
             label,
             style: appStyle(
               12,
-              isActive ? kPrimary : kGray,
+              isActive ? kSecondary : kGray,
               isActive ? FontWeight.w600 : FontWeight.normal,
             ),
           ),

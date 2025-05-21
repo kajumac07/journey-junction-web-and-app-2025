@@ -20,6 +20,8 @@ dependencies:
   google_fonts:
   flutter_screenutil:
   rename:
+  cached_network_image:
+  shimmer:
 
 dev_dependencies:
   flutter_test:
