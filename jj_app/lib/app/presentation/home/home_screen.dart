@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
 import 'package:jj_app/app/core/utils/app_styles.dart';
+import 'package:jj_app/app/core/utils/toast_msg.dart';
+import 'package:jj_app/app/global/widgets/dashed_driver.dart';
 import 'package:jj_app/app/presentation/cloudNotificationScreen/cloud_notification_screen.dart';
 import 'package:jj_app/app/presentation/profile/profile_details_screen.dart';
 import 'package:shimmer/shimmer.dart';
@@ -439,8 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// Drawer Widget
-Widget _buildDrawer(context) {
+Widget _buildDrawer(BuildContext context) {
   return ClipRRect(
     borderRadius: BorderRadius.only(
       topRight: Radius.circular(30.r),
@@ -457,61 +458,77 @@ Widget _buildDrawer(context) {
       ),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [kPrimary.withOpacity(0.1), kSecondary.withOpacity(0.1)],
-          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              offset: Offset(3, 3),
+            ),
+          ],
         ),
         child: Column(
           children: [
-            // Drawer Header
+            // Custom Header with Curved Gradient
             Container(
-              height: 180.h,
+              height: 200.h,
               decoration: BoxDecoration(
-                color: kPrimary.withOpacity(0.2),
+                gradient: LinearGradient(
+                  colors: [kSecondary, kSecondary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30.r),
+                  bottomLeft: Radius.circular(50.r),
                 ),
               ),
               child: Stack(
                 children: [
                   Positioned(
-                    right: -50.w,
-                    top: -50.h,
+                    top: -40.h,
+                    right: -40.w,
                     child: Container(
-                      width: 200.w,
-                      height: 200.h,
+                      width: 120.w,
+                      height: 120.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: kSecondary.withOpacity(0.1),
+                        color: kWhite.withOpacity(0.1),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 20.w, top: 60.h),
-                    child: Column(
+                    padding: EdgeInsets.only(left: 20.w, top: 70.h),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CircleAvatar(
-                          radius: 30.r,
+                          radius: 35.r,
                           backgroundColor: kWhite,
                           child: CircleAvatar(
-                            radius: 28.r,
+                            radius: 33.r,
                             backgroundImage: NetworkImage(
                               'https://randomuser.me/api/portraits/men/1.jpg',
                             ),
                           ),
                         ),
-                        SizedBox(height: 10.h),
-                        Text(
-                          'Alex Johnson',
-                          style: appStyle(18, kDark, FontWeight.bold),
-                        ),
-                        SizedBox(height: 5.h),
-                        Text(
-                          'Travel Blogger',
-                          style: appStyle(14, kGray, FontWeight.normal),
+                        SizedBox(width: 15.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Darling',
+                              style: appStyle(18, kWhite, FontWeight.bold),
+                            ),
+                            SizedBox(height: 5.h),
+                            Text(
+                              'Travel Blogger',
+                              style: appStyle(
+                                14,
+                                Colors.white70,
+                                FontWeight.normal,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -520,49 +537,100 @@ Widget _buildDrawer(context) {
               ),
             ),
 
-            // Drawer Items
+            // Drawer Items with Hover Effects
             Expanded(
               child: ListView(
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(top: 10.h),
                 children: [
-                  _buildDrawerItem(
-                    icon: Icons.home,
-                    title: 'Home',
-                    onTap: () {
-                      Navigator.pop(context);
+                  buildListTile("assets/bookings_bw.png", "Blogs", () {}),
+                  buildListTile(
+                    "assets/profile_bw.png",
+                    "My Profile",
+                    () => Get.to(() => const UserProfileScreen()),
+                  ),
+                  buildListTile("assets/rating_bw.png", "Ratings", () {}),
+                  buildListTile(
+                    "assets/notification_setting.png",
+                    "Notification ON/OFF",
+                    () {
+                      // Get.to(() => NotificationScreenSetting());
                     },
                   ),
-                  _buildDrawerItem(
-                    icon: Icons.explore,
-                    title: 'Explore',
-                    onTap: () {},
+                  buildListTile(
+                    "assets/about_us_bw.png",
+                    "About us",
+                    // () => Get.to(() => AboutUsScreen()),
+                    () => showToastMessage(
+                      "Coming Soon",
+                      "This feature is not available yet",
+                      kPrimary,
+                    ),
                   ),
-                  _buildDrawerItem(
-                    icon: Icons.bookmark_border,
-                    title: 'Saved Journeys',
-                    onTap: () {},
+                  buildListTile(
+                    "assets/help_bw.png",
+                    "Help",
+                    () => showToastMessage(
+                      "Coming Soon",
+                      "This feature is not available yet",
+                      kPrimary,
+                    ),
                   ),
-                  _buildDrawerItem(
-                    icon: Icons.people_alt,
-                    title: 'Community',
-                    onTap: () {},
+                  buildListTile(
+                    "assets/t_c_bw.png",
+                    "Terms & Conditions",
+                    () => showToastMessage(
+                      "Coming Soon",
+                      "This feature is not available yet",
+                      kPrimary,
+                    ),
                   ),
-                  _buildDrawerItem(
-                    icon: Icons.settings,
-                    title: 'Settings',
-                    onTap: () {},
+                  buildListTile(
+                    "assets/privacy_bw.png",
+                    "Privacy Policy",
+                    () => showToastMessage(
+                      "Coming Soon",
+                      "This feature is not available yet",
+                      kPrimary,
+                    ),
                   ),
-                  Divider(color: kGrayLight, height: 20.h),
-                  _buildDrawerItem(
-                    icon: Icons.help_outline,
-                    title: 'Help Center',
-                    onTap: () {},
-                  ),
-                  _buildDrawerItem(
-                    icon: Icons.info_outline,
-                    title: 'About Us',
-                    onTap: () {},
-                  ),
+                  buildListTile("assets/out_bw.png", "Logout", () {
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext dialogContext) {
+                        return AlertDialog(
+                          title: const Text('Logout'),
+                          content: const Text(
+                            'Are you sure you want to log out from this account',
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text(
+                                'Yes',
+                                style: appStyle(
+                                  15,
+                                  kSecondary,
+                                  FontWeight.normal,
+                                ),
+                              ),
+                              onPressed: () {},
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(dialogContext),
+                              child: Text(
+                                "No",
+                                style: appStyle(
+                                  15,
+                                  kPrimary,
+                                  FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }),
                 ],
               ),
             ),
@@ -575,13 +643,13 @@ Widget _buildDrawer(context) {
                   Divider(color: kGrayLight),
                   SizedBox(height: 10.h),
                   Text(
-                    'Journey Junction v1.0',
-                    style: appStyle(12, kGray, FontWeight.normal),
+                    'Journey Junction v$appVersion',
+                    style: appStyle(12, kGray, FontWeight.w400),
                   ),
                   SizedBox(height: 5.h),
                   Text(
                     '© 2025 All Rights Reserved',
-                    style: appStyle(12, kGray, FontWeight.normal),
+                    style: appStyle(12, kGray, FontWeight.w400),
                   ),
                 ],
               ),
@@ -593,17 +661,20 @@ Widget _buildDrawer(context) {
   );
 }
 
-Widget _buildDrawerItem({
-  required IconData icon,
-  required String title,
-  required VoidCallback onTap,
-}) {
-  return ListTile(
-    leading: Icon(icon, color: kPrimary, size: 24.sp),
-    title: Text(title, style: appStyle(16, kDark, FontWeight.w500)),
+Widget buildListTile(String iconName, String title, void Function() onTap) {
+  return GestureDetector(
     onTap: onTap,
-    contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
-    minLeadingWidth: 10.w,
+    child: ListTile(
+      leading: Image.asset(
+        iconName,
+        height: 20.h,
+        width: 20.w,
+        color: kPrimary,
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 18, color: kGray),
+      title: Text(title, style: appStyle(13, kDark, FontWeight.normal)),
+      // onTap: onTap,
+    ),
   );
 }
 
