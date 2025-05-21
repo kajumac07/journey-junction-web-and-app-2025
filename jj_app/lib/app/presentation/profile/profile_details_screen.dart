@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
+import 'package:shimmer/shimmer.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
@@ -13,7 +15,7 @@ class UserProfileScreen extends StatelessWidget {
         slivers: [
           // Profile Header with proper app bar spacing
           SliverAppBar(
-            expandedHeight: 280.h,
+            expandedHeight: 250.h,
             floating: false,
             pinned: true,
             flexibleSpace: LayoutBuilder(
@@ -40,7 +42,7 @@ class UserProfileScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: Row(
                             children: [
-                              // Profile Picture
+                              // Profile Picture with shimmer and cache
                               Container(
                                 width: 90.w,
                                 height: 90.h,
@@ -50,15 +52,30 @@ class UserProfileScreen extends StatelessWidget {
                                     color: kSecondary,
                                     width: 2.w,
                                   ),
-                                  image: const DecorationImage(
-                                    image: NetworkImage(
-                                      'https://randomuser.me/api/portraits/men/1.jpg',
-                                    ),
+                                ),
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        'https://randomuser.me/api/portraits/men/1.jpg',
                                     fit: BoxFit.cover,
+                                    placeholder:
+                                        (context, url) => Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: Container(
+                                            width: 90.w,
+                                            height: 90.h,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                    errorWidget:
+                                        (context, url, error) =>
+                                            Icon(Icons.error, size: 30.w),
                                   ),
                                 ),
                               ),
                               SizedBox(width: 20.w),
+
                               // User Info
                               Expanded(
                                 child: Column(
@@ -255,49 +272,81 @@ class UserProfileScreen extends StatelessWidget {
     return Container(
       width: 150.w,
       margin: EdgeInsets.only(right: 15.w),
-      decoration: BoxDecoration(
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
-        image: DecorationImage(
-          image: NetworkImage(imageUrl),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
+        child: Stack(
+          children: [
+            // Cached Network Image with shimmer
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              width: 150.w,
+              height: double.infinity,
+              fit: BoxFit.cover,
+              placeholder:
+                  (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Container(
+                      width: 150.w,
+                      height: double.infinity,
+                      color: Colors.white,
+                    ),
+                  ),
+              errorWidget:
+                  (context, url, error) => Container(
+                    width: 150.w,
+                    height: double.infinity,
+                    color: Colors.grey[200],
+                    child: Icon(
+                      Icons.broken_image,
+                      color: Colors.grey,
+                      size: 40.w,
+                    ),
+                  ),
+            ),
+
+            // Gradient overlay
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
                 ),
               ),
-              SizedBox(height: 5.h),
-              Row(
+            ),
+
+            // Text and Like count
+            Positioned(
+              bottom: 12.h,
+              left: 12.w,
+              right: 12.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.favorite, size: 14.w, color: Colors.white),
-                  SizedBox(width: 5.w),
                   Text(
-                    likes,
-                    style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                    title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Row(
+                    children: [
+                      Icon(Icons.favorite, size: 14.w, color: Colors.white),
+                      SizedBox(width: 5.w),
+                      Text(
+                        likes,
+                        style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -326,13 +375,35 @@ class UserProfileScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Image with shimmer + caching
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
-            child: Image.network(
-              imageUrl,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
               height: 180.h,
               width: double.infinity,
               fit: BoxFit.cover,
+              placeholder:
+                  (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Container(
+                      height: 180.h,
+                      width: double.infinity,
+                      color: Colors.white,
+                    ),
+                  ),
+              errorWidget:
+                  (context, url, error) => Container(
+                    height: 180.h,
+                    width: double.infinity,
+                    color: Colors.grey[200],
+                    child: Icon(
+                      Icons.broken_image,
+                      size: 40.w,
+                      color: Colors.grey,
+                    ),
+                  ),
             ),
           ),
           Padding(

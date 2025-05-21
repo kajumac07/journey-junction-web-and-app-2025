@@ -4,7 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
 import 'package:jj_app/app/core/utils/app_styles.dart';
 import 'package:jj_app/app/core/utils/toast_msg.dart';
-import 'package:jj_app/app/global/widgets/dashed_driver.dart';
+import 'package:jj_app/app/global/widgets/glowing_icon_button.dart';
+import 'package:jj_app/app/presentation/categoryDetail/category_detail_screen.dart';
 import 'package:jj_app/app/presentation/cloudNotificationScreen/cloud_notification_screen.dart';
 import 'package:jj_app/app/presentation/profile/profile_details_screen.dart';
 import 'package:shimmer/shimmer.dart';
@@ -59,14 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () => _scaffoldKey.currentState!.openDrawer(),
             ),
             actions: [
-              _GlowingIconButton(
+              GlowingIconButton(
                 icon: Icons.notifications,
                 badge: true,
                 onTap: () => Get.to(() => CloudNotificationScreen()),
               ),
 
               SizedBox(width: 5.w),
-              _GlowingIconButton(
+              GlowingIconButton(
                 icon: Icons.person,
                 onTap: () => Get.to(() => UserProfileScreen()),
               ),
@@ -831,7 +832,14 @@ class _HolographicCategory extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16.r),
-          onTap: () {},
+          onTap: () {
+            Get.to(
+              () => CategoryDetailScreen(
+                categoryName: label,
+                categoryColor: kPrimary,
+              ),
+            );
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -1121,81 +1129,6 @@ class _CosmicTestimonial extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _GlowingIconButton extends StatefulWidget {
-  final IconData icon;
-  final bool badge;
-  final VoidCallback onTap;
-
-  const _GlowingIconButton({
-    required this.icon,
-    this.badge = false,
-    required this.onTap,
-  });
-
-  @override
-  __GlowingIconButtonState createState() => __GlowingIconButtonState();
-}
-
-class __GlowingIconButtonState extends State<_GlowingIconButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _glowController;
-
-  @override
-  void initState() {
-    super.initState();
-    _glowController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
-    )..repeat(reverse: true);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // Glow Effect
-        AnimatedBuilder(
-          animation: _glowController,
-          builder: (context, child) {
-            return Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                // color: kPrimary.withOpacity(_glowController.value * 0.3),
-                color: kSecondary,
-              ),
-            );
-          },
-        ),
-
-        // Icon Button
-        IconButton(
-          icon: Icon(widget.icon, color: Colors.white, size: 24.sp),
-          onPressed: widget.onTap,
-        ),
-
-        // Badge
-        if (widget.badge)
-          Positioned(
-            top: 8.h,
-            right: 8.w,
-            child: Container(
-              width: 12.w,
-              height: 12.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.redAccent,
-                border: Border.all(color: Colors.white, width: 1.5),
-              ),
-            ),
-          ),
-      ],
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:jj_app/app/core/constants/constdata.dart';
 import 'package:jj_app/app/core/utils/app_styles.dart';
 import 'package:jj_app/app/presentation/cloudNotificationScreen/cloud_notification_screen.dart';
-import 'package:jj_app/app/presentation/profile/profile_screen.dart';
+import 'package:jj_app/app/presentation/profile/profile_details_screen.dart';
 
 class CommunityScreen extends StatelessWidget {
   const CommunityScreen({super.key});
@@ -30,7 +30,7 @@ class CommunityScreen extends StatelessWidget {
           ),
           SizedBox(width: 10.w),
           GestureDetector(
-            onTap: () => Get.to(() => ProfileScreen()),
+            onTap: () => Get.to(() => UserProfileScreen()),
             child: CircleAvatar(
               backgroundColor: kSecondary,
               radius: 17.r,
