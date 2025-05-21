@@ -138,7 +138,7 @@ class CommunityScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 12.h),
                   SizedBox(
                     height: 150.h,
                     child: ListView(
