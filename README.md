@@ -14,17 +14,32 @@ A beautifully designed travel blogging application that helps users discover, sh
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
   
+  <img src="screenshots/login.png" width="200" alt="Login Screen">
+
+  <img src="screenshots/register.png" width="200" alt="Register Screen">
+  
   <img src="screenshots/onb_1.png" width="200" alt="Onboard Screen">
+  
   <img src="screenshots/onb_2.png" width="200" alt="Onboard Screen">
+  
   <img src="screenshots/home_1.png" width="200" alt="Home Screen">
+  
   <img src="screenshots/home_2.png" width="200" alt="Home Screen">
+  
   <img src="screenshots/home_3.png" width="200" alt="Home Screen">
+  
   <img src="screenshots/home_4.png" width="200" alt="Home Screen">
+  
   <img src="screenshots/dis_1.png" width="200" alt="Explore Screen">
+  
   <img src="screenshots/dis_2.png" width="200" alt="Explore Screen">
+  
   <img src="screenshots/cat_detail.png" width="200" alt="Category Detail Screen">
+  
   <img src="screenshots/cat_detail_2.png" width="200" alt="Category Detail Screen">
+  
   <img src="screenshots/com_1.png" width="200" alt="Community Screen">
+  
   <img src="screenshots/com_2.png" width="200" alt="Community">
 
   <img src="screenshots/drawer.png" width="200" alt="Menu">
