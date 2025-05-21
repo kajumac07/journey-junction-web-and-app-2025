@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jj_app/app/core/constants/constdata.dart';
+import 'package:jj_app/app/presentation/auth/login/login_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController usernameController = TextEditingController();
+
   final TextEditingController bioController = TextEditingController();
+
   final TextEditingController addressController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -80,10 +93,10 @@ class RegisterScreen extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: () {
-                  // Handle registration logic here
+                  // Handle registration logic
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5568FE),
+                  backgroundColor: kPrimary,
                   minimumSize: const Size.fromHeight(50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
@@ -100,11 +113,11 @@ class RegisterScreen extends StatelessWidget {
               Center(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Get.to(() => LoginScreen());
                   },
                   child: const Text(
                     "Already have an account? Log in",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: kSecondary),
                   ),
                 ),
               ),
