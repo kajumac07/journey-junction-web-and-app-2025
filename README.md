@@ -49,6 +49,38 @@ A beautifully designed travel blogging application that helps users discover, sh
 
 </div>
 
+## [text](https://www.flaticon.com/free-icon/world-wide-web_1006771) Web Screenshots
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  
+  <img src="screenshots/home.png" width="200" alt="">
+  
+  <img src="screenshots/homew_2.png" width="200" alt="">
+
+  <img src="screenshots/whome_3.png" width="200" alt="">
+
+  <img src="screenshots/whome_4.png" width="200" alt="">
+  
+  <img src="screenshots/whome_5.png" width="200" alt="">
+  
+  <img src="screenshots/home_6.png" width="200" alt="">
+  
+  <img src="screenshots/home_7.png" width="200" alt="">
+
+  <img src="screenshots/home_8.png" width="200" alt="">
+  
+  <img src="screenshots/home_9.png" width="200" alt="">
+  
+  <img src="screenshots/home_10.png" width="200" alt="">
+  
+  <img src="screenshots/home_11.png" width="200" alt="">
+  
+  <img src="screenshots/home_12.png" width="200" alt="">
+  
+  <img src="screenshots/home_13.png" width="200" alt="">
+
+</div>
+
 ## 🛠️ Technical Stack
 
 - **Framework**: Flutter 3.x

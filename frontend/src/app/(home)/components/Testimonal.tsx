@@ -56,9 +56,7 @@ export default function TestimonalComponent() {
                 <h3 className="font-bold text-xl text-gray-900">
                   Dimple Pandey
                 </h3>
-                <p className="text-myprimary font-medium">
-                  Adventure Enthusiast
-                </p>
+                <p className="text-myprimary font-medium">Nature Lover</p>
               </div>
             </div>
             <p className="text-gray-600 mb-6 text-lg leading-relaxed">
@@ -100,7 +98,7 @@ export default function TestimonalComponent() {
                 </div>
               </div>
               <div className="ml-4">
-                <h3 className="font-bold text-xl text-gray-900">Kalua</h3>
+                <h3 className="font-bold text-xl text-gray-900">Darling</h3>
                 <p className="text-myprimary font-medium">
                   Photography Enthusiast
                 </p>
